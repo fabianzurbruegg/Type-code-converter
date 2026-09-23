@@ -7,7 +7,6 @@ import os
 # ==========================================
 # 1. LOAD JSON CONFIGURATION
 # ==========================================
-@st.cache_data
 def load_mapping_config():
     file_path = "mapping_config.json"
     if os.path.exists(file_path):
