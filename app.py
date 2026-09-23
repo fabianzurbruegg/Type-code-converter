@@ -18,14 +18,14 @@ def load_mapping_config():
 MAPPING_DATA = load_mapping_config()
 
 # ==========================================
-# 2. CORE LOGIC (100% JSON-based with Substring Protection & Specs)
+# 2. CORE LOGIC (100% JSON-based with Dynamic Connectors)
 # ==========================================
 def parse_and_convert_typekey(alt_key: str) -> dict:
     if not alt_key or not alt_key.strip():
-        return {"new": "", "info": "", "error": False}
+        return {"new": "", "info": "", "error": False, "ng_size": ""}
 
     if not MAPPING_DATA:
-        return {"new": "ERROR: mapping_config.json is missing!", "info": "", "error": True}
+        return {"new": "ERROR: mapping_config.json is missing!", "info": "", "error": True, "ng_size": ""}
 
     cleaned = alt_key.strip().replace(" ", "").replace("\t", "")
     raw = cleaned.upper()
@@ -34,19 +34,20 @@ def parse_and_convert_typekey(alt_key: str) -> dict:
     raw = re.sub(r'-A-', 'A', raw)
     raw = re.sub(r'-B-', 'B', raw)
 
-    # --- DESTRUCTIVE PARSING SETUP ---
     search_raw = raw 
 
-    # 1. Find base prefix dynamically
+    # 1. Find base prefix dynamically & speichere altes Präfix
     new_prefix_base = None
+    found_old_prefix = None
     for old_pref, new_pref in sorted(MAPPING_DATA.get("PREFIX_MAP", {}).items(), key=lambda item: len(item[0]), reverse=True):
         if search_raw.startswith(old_pref.upper()):
             new_prefix_base = new_pref
+            found_old_prefix = old_pref.upper()
             search_raw = search_raw.replace(old_pref.upper(), "", 1)
             break
 
     if not new_prefix_base:
-        return {"new": f"ERROR: Prefix for '{raw}' not defined in JSON.", "info": "", "error": True}
+        return {"new": f"ERROR: Prefix for '{raw}' not defined in JSON.", "info": "", "error": True, "ng_size": ""}
 
     # 2. Find spool symbol
     found_spool_new = None
@@ -59,7 +60,7 @@ def parse_and_convert_typekey(alt_key: str) -> dict:
             break
             
     if not found_spool_new:
-        return {"new": "ERROR: Spool symbol not found in JSON.", "info": "", "error": True}
+        return {"new": "ERROR: Spool symbol not found in JSON.", "info": "", "error": True, "ng_size": ""}
 
     # --- DYNAMIC NOMINAL SIZE (NG) CALCULATION ---
     ng_size = "UNKNOWN"
@@ -80,7 +81,7 @@ def parse_and_convert_typekey(alt_key: str) -> dict:
     final_prefix = f"{new_prefix_base}{ng_padded}"
 
     # 3. Find voltage
-    found_volt_new = "NO_VOLTAGE"
+    found_volt_new = "VOLTAGE_MISSING"
     for old_volt, new_volt in MAPPING_DATA.get("VOLTAGE_MAP", {}).items():
         if old_volt.upper() in search_raw:
             found_volt_new = new_volt
@@ -88,7 +89,21 @@ def parse_and_convert_typekey(alt_key: str) -> dict:
             break
             
     # 4. Extract options dynamically
-    connector = MAPPING_DATA.get("COIL_CONNECTOR", {}).get("", "/NO_COIL&CONNECTOR")
+    default_connector = MAPPING_DATA.get("DEFAULT_CONNECTOR_MAP", {}).get(found_old_prefix, "/WD")
+    
+    if found_volt_new == "R24":
+        if ng_size == "4":
+            default_connector = "/ND"
+        elif ng_size in ["6", "10"]:
+            default_connector = "/MD"
+    elif found_volt_new in ["R115", "R230"]:
+        if ng_size == "4":
+            default_connector = "/VD or ND"
+        elif ng_size in ["6", "10"]:
+            default_connector = "/WD (option MD)"
+
+    connector = default_connector
+    
     for old_c, new_c in MAPPING_DATA.get("COIL_CONNECTOR", {}).items():
         if old_c and not old_c.startswith("_") and old_c.upper() in search_raw:
             connector = f"-{new_c}" if not new_c.startswith('-') else new_c
@@ -110,7 +125,7 @@ def parse_and_convert_typekey(alt_key: str) -> dict:
 
     # 5. Hard validation rules
     if "R110" in raw:
-        return {"new": "ERROR: Voltage R110 is no longer available!", "info": "", "error": True}
+        return {"new": "ERROR: Voltage R110 is no longer available!", "info": "", "error": True, "ng_size": ""}
 
     # Build target string
     new_key = f"{final_prefix}-{found_spool_new}-{found_volt_new}{connector}{sealing}{sz_num}"
@@ -121,12 +136,55 @@ def parse_and_convert_typekey(alt_key: str) -> dict:
         f"**General Specifications:** NG{ng_size} Nominal Size"
     )
     
-    return {"new": new_key, "info": info_text, "error": False}
+    return {"new": new_key, "info": info_text, "error": False, "ng_size": ng_size}
 
 # ==========================================
-# 3. STREAMLIT USER INTERFACE
+# 3. HELPER: DYNAMIC DATASHEET TABLE
+# ==========================================
+def render_datasheet_table(ng_size):
+    st.markdown(f"### 📄 Technical Datasheets (NG{ng_size})")
+    
+    if str(ng_size) == "4":
+        st.markdown("""
+| Series / Version | Datasheet No. | Direct Link |
+| :--- | :--- | :--- |
+| **Old Series (NG4)** | 1.2-31E | [Open Old Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_31_e.pdf) |
+| **New Series (NG4)** | 1.2-33E | [Open New Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_33_e.pdf) |
+        """)
+    elif str(ng_size) == "6":
+        st.markdown("""
+| Series / Version | Datasheet No. | Direct Link |
+| :--- | :--- | :--- |
+| **Old Series (NG6)** | 1.2-57E | [Open Old Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_57_e.pdf) |
+| **New Series (NG6)** | 1.2-59E | [Open New Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_59_e.pdf) |
+        """)
+    else:
+        # Fallback für NG10 (oder unbekannte)
+        st.markdown("""
+| Series / Version | Datasheet No. | Direct Link |
+| :--- | :--- | :--- |
+| **Old Series (NG10)** | 1.2-71D | [Open Old Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_71_e.pdf) |
+| **New Series (NG10)** | 1.2-76D | [Open New Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_76_e.pdf) |
+        """)
+
+# ==========================================
+# 4. STREAMLIT USER INTERFACE
 # ==========================================
 st.set_page_config(page_title="Type Code Converter", page_icon="🔄", layout="centered")
+
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(to bottom, #FFFFFF 95%, #0082A9 5%);
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.image("logo.png", width=300)
 
 st.title("Replacement Valve Finder")
 if not MAPPING_DATA:
@@ -135,9 +193,8 @@ if not MAPPING_DATA:
 tab1, tab2 = st.tabs(["Single Query", "Batch Conversion"])
 
 with tab1:
-    st.subheader("Quick Search")
+    st.subheader("Type Code Converter")
     
-    # Custom CSS, um das Eingabefeld (Text Input) in der Schriftgrösse grösser und markanter zu machen
     st.markdown("""
         <style>
         input[aria-label="Enter the old type code:"] {
@@ -149,7 +206,7 @@ with tab1:
         </style>
     """, unsafe_allow_html=True)
 
-    single_input = st.text_input("Enter the old type code:", placeholder="e.g., AM4J100-G24")
+    single_input = st.text_input("Enter the old type code:", placeholder="e.g., AM4J60-G24")
     
     if single_input:
         result = parse_and_convert_typekey(single_input)
@@ -158,56 +215,54 @@ with tab1:
         else:
             st.success("✅ Successfully converted!")
             
-            # Prominent und gross dargestellter Replacement Type
             st.markdown("### Replacement Type")
             st.markdown(
                 f"<div style='font-size: 24px; font-weight: bold; font-family: monospace; background-color: #e6f4ea; padding: 12px; border-radius: 5px; color: #137333; border: 1px solid #ceead6;'>{result['new']}</div>", 
                 unsafe_allow_html=True
             )
             
-            # Mandatory Warning Notice mit Zeilenumbruch
-            st.warning(
-                "⚠️ **Warning** - Replacement Type:\n\n"
-                "Please note the changed hydraulic performance data and valve dimensions. "
-                "Check the valve for suitability in your application."
+            st.markdown(
+                """
+                <div style="background-color: #fff3cd; color: #856404; padding: 16px; border-radius: 6px; border-left: 5px solid #ffeeba; font-family: sans-serif; margin-bottom: 15px;">
+                    <span style="font-weight: bold; font-size: 16px;">⚠️ Warning - Replacement Type:</span><br><br>
+                    Please note the changed hydraulic performance data and valve dimensions. Check the valve for suitability in your application.
+                </div>
+                """, 
+                unsafe_allow_html=True
             )
             
             if result["info"]:
                 st.info(result["info"])
             
-            # Datasheets Table
-            st.markdown("### 📄 Technical Datasheets")
-            st.markdown("""
-| Series / Version | Datasheet No. | Direct Link |
-| :--- | :--- | :--- |
-| **Old Series** | 1.2-71D[cite: 1] | [Open Old Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_71_e.pdf) |
-| **New Series** | 1.2-76D[cite: 2] | [Open New Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_76_e.pdf) |
-            """)
+            # Dynamische Datenblatt-Tabelle basierend auf NG
+            render_datasheet_table(result["ng_size"])
 
 with tab2:
     st.subheader("Convert Multiple Type Codes")
     batch_input = st.text_area("Enter multiple old type codes (one per line):", height=200, 
-                               placeholder="AM4J100-G24\nAS4Z101a-G12")
+                               placeholder="BE4D41-G24\nAM4J100-G24")
     
     if st.button("Convert"):
         if batch_input:
             lines = batch_input.split('\n')
             results = []
+            found_ngs = set()
+            
             for line in lines:
                 if line.strip():
                     res = parse_and_convert_typekey(line)
                     results.append({"Old": line.strip(), "New": res["new"], "Status": "Error" if res["error"] else "OK"})
+                    if not res["error"] and res["ng_size"]:
+                        found_ngs.add(res["ng_size"])
             
             df = pd.DataFrame(results)
             st.dataframe(df, use_container_width=True)
             
-            st.markdown("### 📄 Technical Datasheets & References")
-            st.markdown("""
-| Series / Version | Datasheet No. | Direct Link |
-| :--- | :--- | :--- |
-| **Old Series** | 1.2-71D[cite: 1] | [Open Old Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_71_e.pdf) |
-| **New Series** | 1.2-76D[cite: 2] | [Open New Datasheet (PDF)](https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_76_e.pdf) |
-            """)
+            # Dynamische Datenblatt-Tabellen für alle in der Batch gefundenen Nenngrössen
+            if found_ngs:
+                st.markdown("---")
+                for ng in sorted(list(found_ngs)):
+                    render_datasheet_table(ng)
             
             csv = df.to_csv(index=False, sep=';').encode('utf-8')
             st.download_button(
