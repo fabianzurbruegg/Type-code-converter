@@ -1,4 +1,5 @@
 [theme]
+base = "light"
 primaryColor = "#0080a9"     # Wandfluh-Blau (Beispielwert)
 backgroundColor = "#FFFF" # Sauberer weißer Hintergrund
 secondaryBackgroundColor = "#F0F2F6"
