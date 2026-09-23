@@ -1,0 +1,47 @@
+{
+  "PREFIX_MAP": {
+    "AM4": "WDMFA",
+    "AS4": "WDMFA"
+  },
+  "SPOOL_MAP": {
+    "J100": "AB3",
+    "J60": "AB3",
+    "J40": "AB3",
+    "Z100a": "AB1",
+    "Z100b": "AB2",
+    "D101": "ACB",
+    "D61": "ACB",
+    "Z101a": "AC1",
+    "Z101b": "CB2",
+    "D102": "ADB",
+    "Z102a": "AD1",
+    "Z102b": "DB2",
+    "D103": "BEA",
+    "Z103a": "BE1",
+    "Z103b": "EA2",
+    "D104": "AFB",
+    "Z104a": "AF1",
+    "Z104b": "FB2",
+    "D105": "AGB",
+    "Z105a": "AG1",
+    "Z105b": "GB2"
+  },
+  "VOLTAGE_MAP": {
+    "G12": "G12",
+    "G24": "G24",
+    "R115": "R115",
+    "R230": "R230"
+  },
+  "COIL_CONNECTOR": {
+    "": "/NO_COIL&CONNECTOR",
+    "_comment": "zu klaeren, wie alte Spulen definiert wurden"
+  },
+  "SEALINGS": {
+    "":"",
+    "D1": "D1"
+  },
+  "S/Z-NUMBERS": {
+    "":"",
+    "S582": "Z57"
+  }
+}
