@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#0080a9"     # Wandfluh-Blau (Beispielwert)
+backgroundColor = "#FFFF" # Sauberer weißer Hintergrund
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"

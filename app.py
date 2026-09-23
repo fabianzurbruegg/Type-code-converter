@@ -172,17 +172,7 @@ def render_datasheet_table(ng_size):
 # ==========================================
 st.set_page_config(page_title="Type Code Converter", page_icon="🔄", layout="centered")
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: linear-gradient(to top, #0082A9 5%, #FFFFFF 5%);
-        background-attachment: fixed;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+
 
 st.image("logo.png", width=300)
 
