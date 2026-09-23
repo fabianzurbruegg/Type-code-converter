@@ -176,14 +176,14 @@ st.set_page_config(page_title="Type Code Converter", page_icon="🔄", layout="c
 
 st.image("logo.png", width=300)
 
-st.title("Replacement Valve Finder")
+st.title("Type Code Converter")
 if not MAPPING_DATA:
     st.error("⚠️: mapping_config.json not found. Tool is out of order.")
 
 tab1, tab2 = st.tabs(["Single Query", "Batch Conversion"])
 
 with tab1:
-    st.subheader("Type Code Converter")
+    st.subheader("Looking for a replacement type code?")
     
     st.markdown("""
         <style>
@@ -196,7 +196,7 @@ with tab1:
         </style>
     """, unsafe_allow_html=True)
 
-    single_input = st.text_input("Enter the old type code:", placeholder="e.g., AM4J60-G24")
+    single_input = st.text_input("Enter the old type code below - good luck :-)", placeholder="e.g., AM4J60-G24")
     
     if single_input:
         result = parse_and_convert_typekey(single_input)
