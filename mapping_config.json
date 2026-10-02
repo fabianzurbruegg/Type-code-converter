@@ -1,20 +1,217 @@
 {
-  "PREFIX_MAP": {
-    "AM4": "WDMFA",
-    "AS4": "WDMFA",
-    "AW4": "WDMFA",
-    "BE4": "WDEFA",
-    "BM4": "WDMFA",
-    "AEX4": "WDYFA",
-    "AWW4": "WWMFA",
-    "AMW4": "WWMFA",
-    "AK4": "WDLFA",
-    "AP4": "WFFFA",
-    "AMVP4": "WVMFA",
-    "BPW4": "WDPFA",
-    "APW4": "WDPFA"
-  },
-  "SPOOL_MAP": {
+    "PREFIX_MAP": {
+        "BE4_1.2.31": {
+            "new_code": "WDEFA",
+            "ng_type": "NG4-Mini",
+            "coil_ref": "E (BEIIV)",
+            "coil_connector_type": "VD",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base_Valve",
+                    "old_val": "BE..4",
+                    "new_val": "WDF..A04",
+                    "desc": "Solenoid operated spool valve direct operated NG4-Mini",
+                    "old_ds": "1.2-31E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_31_e.pdf",
+                    "new_ds": "1.2-33E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_33_e.pdf"
+                }
+            ]
+        },
+        "BM4_1.2.31": {
+            "new_code": "WDMFA",
+            "ng_type": "NG4-Mini",
+            "coil_ref": "M (SIN35V)",
+            "coil_connector_type": "VD",
+            "coil_connector_option": "ND",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve",
+                    "old_val": "BM..4",
+                    "new_val": "WD.FA04",
+                    "desc": "Solenoid operated spool valve direct operated NG4-Mini",
+                    "old_ds": "1.2-31E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_31_e.pdf",
+                    "new_ds": "1.2-33E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_33_e.pdf"
+                }
+            ]
+        },
+        "WDEFB04_1.2.51": {
+            "new_code": "WDEFB04",
+            "ng_type": "NG4",
+            "coil_ref": "E (BEIIV)",
+            "coil_connector_type": "VD",
+           
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve (Standard)",
+                    "old_val": "WDEFB04",
+                    "new_val": "WDEFB04",
+                    "desc": "Solenoid operated spool valve direct operated ISO 4401-02 NG4",
+                    "old_ds": "1.2-51E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_51_e.pdf",
+                    "new_ds": "1.2-53E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_53_e.pdf"
+                }
+            ]
+        },
+        "WDMFB04_1.2.51": {
+            "new_code": "WDMFB04",
+            "ng_type": "NG4",
+            "coil_ref": "M (SIN35V)",
+            "coil_connector_type": "VD",
+            "coil_connector_option": "ND",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve (Standard)",
+                    "old_val": "WDMFB04",
+                    "new_val": "WDMFB04",
+                    "desc": "Solenoid operated spool valve direct operated ISO 4401-02 NG4",
+                    "old_ds": "1.2-51E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_51_e.pdf",
+                    "new_ds": "1.2-53E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_53_e.pdf"
+                }
+            ]
+        },
+        "AM4_6_1.2.57": {
+            "new_code": "WDMFA06",
+            "ng_type": "NG6",
+            "coil_ref": "M (SIN45V)",
+            "coil_connector_type": "WD",
+            "coil_connector_option": "MD",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve",
+                    "old_val": "AM4.6",
+                    "new_val": "WDMFA06",
+                    "desc": "Solenoid operated spool valve direct operated ISO 4401-03 NG6",
+                    "old_ds": "1.2-57E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_57_e.pdf",
+                    "new_ds": "1.2-59E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_59_e.pdf"
+                }
+            ]
+        },
+        "AS4_6_1.2.57": {
+            "new_code": "WDMFA06",
+            "ng_type": "NG6",
+            "coil_ref": "M (SIN45V)",
+            "coil_connector_type": "WD",
+            "coil_connector_option": "MD",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve",
+                    "old_val": "AS4.6",
+                    "new_val": "WDMFA06",
+                    "desc": "Solenoid operated spool valve direct operated ISO 4401-03 NG6",
+                    "old_ds": "1.2-57E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_57_e.pdf",
+                    "new_ds": "1.2-59E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_59_e.pdf"
+                }
+            ]
+        },
+        "AM4_10": {
+            "new_code": "WDMFA10",
+            "ng_type": "NG10",
+            "coil_ref": "M (SIN60V)",
+            "coil_connector_type": "WD",
+            "coil_connector_option": "MD",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve",
+                    "old_val": "AM4.10",
+                    "new_val": "WDMFA10",
+                    "desc": "Solenoid operated spool valve direct operated ISO 4401-05 NG10",
+                    "old_ds": "1.2-71E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_71_e.pdf",
+                    "new_ds": "1.2-76E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_76_e.pdf"
+                }
+            ]
+        },
+        "AS4_10": {
+            "new_code": "WDMFA10",
+            "ng_type": "NG10",
+            "coil_ref": "M (SIN60V)",
+            "coil_connector_type": "WD",
+            "coil_connector_option": "MD",
+            "allowed_manual_overrides": ["HF1", "HS1"],
+            "breakdown": [
+                {
+                    "component": "Base Valve",
+                    "old_val": "AS4.10",
+                    "new_val": "WDMFA10",
+                    "desc": "Solenoid operated spool valve direct operated ISO 4401-05 NG10",
+                    "old_ds": "1.2-71E",
+                    "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_71_e.pdf",
+                    "new_ds": "1.2-76E",
+                    "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.2%20Solenoid%20operated%20spool%20valves%20direct%20operated/1_2_76_e.pdf"
+                }
+            ]
+        },
+        "AW4": {"new_code": "WDMFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "AEX4": {"new_code": "WDYFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "AWW4": {"new_code": "WWMFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "AMW4": {"new_code": "WWMFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "AK4": {"new_code": "WDLFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "AP4": {"new_code": "WFFFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "AMVP4": {"new_code": "WVMFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "BPW4": {"new_code": "WDPFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]},
+        "APW4": {"new_code": "WDPFA", "coil_ref": "Economy_Mini", "coil_connector_type": "VD", "coil_connector_option": "ND", "allowed_manual_overrides": ["HF1", "HS1"]}
+    },
+    "COIL_POOL": {
+        "E (BEIIV)": {
+            "component": "Coil",
+            "old_coil": "E (BEIIV)",
+            "new_coil": "E (V.E37/19x40)",
+            "desc": "Economy Coil",
+            "old_ds": "1.1-100E",
+            "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_100_e.pdf",
+            "new_ds": "1.1-168E",
+            "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_168_e.pdf"
+        },
+        "M (SIN35V)": {
+            "component": "Coil",
+            "old_coil": "M (SIN35V)",
+            "new_coil": "M (V.E37/19x50)",
+            "desc": "Medium Coil",
+            "old_ds": "1.1-105E",
+            "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_105_e.pdf",
+            "new_ds": "1.1-168E",
+            "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_168_e.pdf"
+        },
+        "M (SIN45V)": {
+            "component": "Coil",
+            "old_coil": "M (SIN45V)",
+            "new_coil": "M (W.E45/23x50)",
+            "desc": "Medium Coil",
+            "old_ds": "1.1-120E",
+            "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_120_e.pdf",
+            "new_ds": "1.1-182E",
+            "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_182_e.pdf"
+        },
+        "M (SIN60V)": {
+            "component": "Coil",
+            "old_coil": "M (SIN60V)",
+            "new_coil": "M (W.E64/31x72)",
+            "desc": "Medium Coil",
+            "old_ds": "1.1-145E",
+            "old_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_145_e.pdf",
+            "new_ds": "1.1-190E",
+            "new_ds_link": "https://www.wandfluh.com/fileadmin/user_upload/Wandfluh/Products/Components/DataSheets/Englisch/1.1%20SolenoidsManual%20override/1_1_190_e.pdf"
+        }
+    },
+     "SPOOL_MAP": {
     "J30": "AB3",
     "J40": "AB3",
     "J60": "AB3",
@@ -88,27 +285,22 @@
     "Z65b": "GB2",
     "Z105b": "GB2"
   },
-  "VOLTAGE_MAP": {
-    "G12": "G12",
-    "G24": "G24",
-    "R24": "R24",
-    "R115": "R115",
-    "R230": "R230"
-  },
-  "DEFAULT_CONNECTOR_MAP": {
-    "BE4": "/VD",
-    "AMVP4": "/VD",
-    "BPW4": "/VD"
-  },
-  "COIL_CONNECTOR": {
-    "_comment": "zu klaeren, wie alte Spulen definiert wurden"
-  },
-  "SEALINGS": {
-    "": "",
-    "D1": "D1"
-  },
-  "S/Z-NUMBERS": {
-    "": "",
-    "S582": "Z57"
-  }
+    "VOLTAGE_MAP": {
+        "G12": "G12",
+        "G24": "G24",
+        "R24": "R24",
+        "R110":"R115",
+        "R115": "R115",
+        "R230": "R230"
+    },
+    "MANUAL_OVERRIDE_MAP": {
+        "H1": "HF1",
+        "H21": "HF1",
+        "H22": "HS1",
+        "H6": "HS1",
+        "H19": "HS1",
+        "H20": "HS1",
+        "HBO": ""
+    },
+    "HISTORY_LOG": []
 }
