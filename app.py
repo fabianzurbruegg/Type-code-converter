@@ -338,7 +338,7 @@ st.title("Replacement Valve Finder")
 # Hinzugefügter Prototyp-Hinweis
 st.markdown("""
 <div style='background-color: #f1f3f4; border-left: 4px solid #5f6368; padding: 10px 14px; border-radius: 4px; margin-bottom: 20px; font-size: 14px; color: #3c4043;'>
-    <b>Prototyp:</b> Funktioniert erst für 1.2 Schieberventile, Standardtypen NG4-Mini, NG4, NG6 und NG10. Nichts konfigurierbar, was nicht auf dem Datenblatt aufgeführt ist, keine S, Z Nummern, keine Sonderspulen. — <b>ZUF</b>
+    <b>Prototyp:</b> Funktioniert erst für 1.2 Schieberventile, Standardtypen NG4-Mini, NG4, NG6 und NG10. Nichts konfigurierbar, was nicht auf dem Datenblatt aufgeführt ist, keine S, Z Nummern, keine Sonderspulen. Beispiele: BM4J40-G24-H6 / WDEFB04-ACB-R230-H22 / AM4D61-R110-H19 / AM4D101-G24-H1 — <b>ZUF</b>
 </div>
 """, unsafe_allow_html=True)
 
